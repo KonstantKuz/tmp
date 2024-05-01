@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e41b081b1d4c467ab557c0c068d4aca0, type: 3}
+  m_Name: InputServiceInstaller
+  m_EditorClassIdentifier: 
+  inputPrefab: {fileID: 2401462788578435309, guid: fb0ded0a808735f4ea7061087d8737cb,
+    type: 3}
