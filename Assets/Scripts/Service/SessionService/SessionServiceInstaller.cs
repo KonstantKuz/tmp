@@ -21,6 +21,11 @@ namespace Service.SessionService
                 .BindInterfacesTo<SessionService>()
                 .AsSingle()
                 .WithArguments(this);
+
+            Container
+                .Bind<SessionBuilder>()
+                .AsSingle()
+                .WithArguments(NetworkPrefab);
         }
     }
 }

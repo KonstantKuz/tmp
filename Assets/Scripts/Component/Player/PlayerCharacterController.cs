@@ -1,53 +1,67 @@
+using Component.Character;
 using Fusion;
 using Fusion.Addons.KCC;
 using Service.InputService;
 using UnityEngine;
-using Zenject;
 
 namespace Component.Player
 {
     public class PlayerCharacterController : NetworkBehaviour
     {
         [SerializeField]
+        private float _jumpForce;
+
+        [SerializeField]
         private float speed;
 
-        private IInputService _inputService;
-        private KCC _controller;
+        private KCC _kinematicController;
+        private AnimationController _animationController;
 
-        [Inject]
-        private void Construct(IInputService inputService)
-        {
-            _inputService = inputService;
-        }
+        private bool _hasInput;
+        private DefaultInput _input;
+        private bool _hasJumped;
+
+        [Networked]
+        private NetworkButtons PreviousButtons { get; set; }
 
         private void Awake()
         {
-            _controller = GetComponent<KCC>();
-        }
-
-        public override void Spawned()
-        {
-            base.Spawned();
-            _inputService.ActionsMap.Enable();
-            _inputService.ActionsMap.Player.Move.performed += _ => Debug.Log("Trying to move!");
+            _kinematicController = GetComponent<KCC>();
+            _animationController = GetComponent<AnimationController>();
         }
 
         public override void FixedUpdateNetwork()
         {
-            if (HasStateAuthority == false)
+            _hasInput = GetInput(out _input);
+
+            if (!_hasInput)
             {
                 return;
             }
 
-            Vector2 moveInput = _inputService.ActionsMap.Player.Move.ReadValue<Vector2>();
-            Vector3 move = new Vector3(moveInput.x, 0, moveInput.y) * Runner.DeltaTime * speed;
-
-            _controller.AddExternalVelocity(move);
-
-            if (move != Vector3.zero)
+            Vector3 move = new Vector3(_input.Move.x, 0, _input.Move.y) * Runner.DeltaTime * speed;
+            _kinematicController.AddExternalVelocity(move);
+            _hasJumped = _input.Buttons.WasPressed(PreviousButtons, InputActions.Jump);
+            if (_hasJumped)
             {
-                gameObject.transform.forward = move;
+                _kinematicController.Jump(Vector3.up * _jumpForce * Runner.DeltaTime);
             }
+
+            PreviousButtons = _input.Buttons;
+        }
+
+        public override void Render()
+        {
+            if (!_hasInput)
+            {
+                return;
+            }
+
+            _animationController.VerticalMotion = _input.Move.y;
+            _animationController.HorizontalMotion = _input.Move.x;
+            _animationController.HasJumped = _hasJumped;
+            _animationController.IsGrounded = _kinematicController.Data.IsGrounded;
+            _hasJumped = false;
         }
     }
 }

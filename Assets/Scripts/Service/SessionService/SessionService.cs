@@ -1,19 +1,17 @@
 ﻿using Fusion;
-using Service.Factory;
 using UnityEngine;
-using Zenject;
 
 namespace Service.SessionService
 {
-    public class SessionService : ISessionService, IInitializable
+    public class SessionService : ISessionService
     {
         private readonly SessionServiceInstaller _installer;
-        private readonly DefaultFactory _defaultFactory;
+        private readonly SessionBuilder _sessionBuilder;
 
-        public SessionService(SessionServiceInstaller installer, DefaultFactory defaultFactory)
+        public SessionService(SessionServiceInstaller installer, SessionBuilder sessionBuilder)
         {
             _installer = installer;
-            _defaultFactory = defaultFactory;
+            _sessionBuilder = sessionBuilder;
         }
 
         public Session Current { get; private set; }
@@ -25,10 +23,17 @@ namespace Service.SessionService
                 return;
             }
 
-            Current.Factory.Create(_installer.PlayerPrefab);
+            Current.Factory.Create(networkRunner.LocalPlayer, _installer.PlayerPrefab);
         }
 
-        async void ISessionService.Start(StartGameArgs gameArgs)
+        private void Terminate(NetworkRunner runner, ShutdownReason reason)
+        {
+            Debug.Log($"Terminate session. Reason: {reason.ToString()}");
+            Current.Terminate();
+            Current = null;
+        }
+
+        void ISessionService.Start(StartGameArgs gameArgs)
         {
             if (Current != null)
             {
@@ -36,29 +41,10 @@ namespace Service.SessionService
                 return;
             }
 
-            GameObject network = _defaultFactory.Create(_installer.NetworkPrefab);
-            NetworkRunner runner = network.GetComponent<NetworkRunner>();
-            NetworkEvents events = network.GetComponent<NetworkEvents>();
-            INetworkSceneManager sceneManager = network.GetComponent<INetworkSceneManager>();
-
-            events.PlayerJoined.AddListener(CreatePlayer);
-            runner.ProvideInput = true;
-
-            await runner.StartGame(gameArgs);
-
-            Current = new Session(runner, events, sceneManager);
-        }
-
-        void IInitializable.Initialize()
-        {
-            StartGameArgs gameArgs = new StartGameArgs()
-            {
-                GameMode = GameMode.Shared,
-                SessionName = "TestRoom",
-                Scene = SceneRef.FromIndex(0)
-            };
-
-            ((ISessionService) this).Start(gameArgs);
+            Current = _sessionBuilder.Create();
+            Current.Events.PlayerJoined.AddListener(CreatePlayer);
+            Current.Events.OnShutdown.AddListener(Terminate);
+            Current.Start(gameArgs);
         }
     }
 }

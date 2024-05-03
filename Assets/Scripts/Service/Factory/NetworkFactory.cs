@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Service.Factory
 {
-    public class NetworkFactory : IFactory<GameObject, GameObject>
+    public class NetworkFactory : IFactory<PlayerRef, GameObject, GameObject>
     {
         private NetworkRunner _networkRunner;
 
@@ -13,9 +13,9 @@ namespace Service.Factory
             _networkRunner = networkRunner;
         }
 
-        public GameObject Create(GameObject prefab)
+        public GameObject Create(PlayerRef playerRef, GameObject prefab)
         {
-            return _networkRunner.Spawn(prefab).gameObject;
+            return _networkRunner.Spawn(prefab, inputAuthority: playerRef).gameObject;
         }
     }
 }
