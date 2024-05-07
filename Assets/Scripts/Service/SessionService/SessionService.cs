@@ -18,32 +18,19 @@ namespace Service.SessionService
 
         private void CreatePlayer(NetworkRunner networkRunner, PlayerRef playerRef)
         {
-            if (playerRef != Current.Runner.LocalPlayer)
-            {
-                return;
-            }
-
-            Current.Factory.Create(networkRunner.LocalPlayer, _installer.PlayerPrefab);
-        }
-
-        private void Terminate(NetworkRunner runner, ShutdownReason reason)
-        {
-            Debug.Log($"Terminate session. Reason: {reason.ToString()}");
-            Current.Terminate();
-            Current = null;
+            Current.Factory.Create(playerRef, _installer.PlayerPrefab);
         }
 
         void ISessionService.Start(StartGameArgs gameArgs)
         {
-            if (Current != null)
+            if (Current != null && Current.Runner.IsRunning)
             {
-                Debug.LogError("Session is already running.");
-                return;
+                Debug.LogWarning("There is a running session. Shutdown.");
+                Current.Runner.Shutdown();
             }
 
             Current = _sessionBuilder.Create();
             Current.Events.PlayerJoined.AddListener(CreatePlayer);
-            Current.Events.OnShutdown.AddListener(Terminate);
             Current.Start(gameArgs);
         }
     }

@@ -4,10 +4,10 @@ using Zenject;
 namespace Service.Factory
 {
     [CreateAssetMenu(
-        menuName = GlobalSettings.InstallersPath + nameof(FactoriesInstaller),
-        fileName = nameof(FactoriesInstaller)
+        menuName = GlobalSettings.InstallersPath + nameof(DefaultFactoryInstaller),
+        fileName = nameof(DefaultFactoryInstaller)
     )]
-    public class FactoriesInstaller : ScriptableObjectInstaller
+    public class DefaultFactoryInstaller : ScriptableObjectInstaller
     {
         public override void InstallBindings()
         {

@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 559b787e8be3411ebdb9fa39ca5bb1a4, type: 3}
-  m_Name: FactoriesInstaller
+  m_Name: DefaultFactoryInstaller
   m_EditorClassIdentifier: 

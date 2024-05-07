@@ -1,67 +1,35 @@
-using Component.Character;
 using Fusion;
-using Fusion.Addons.KCC;
 using Service.InputService;
-using UnityEngine;
+using CharacterController = Component.Character.CharacterController;
 
 namespace Component.Player
 {
     public class PlayerCharacterController : NetworkBehaviour
     {
-        [SerializeField]
-        private float _jumpForce;
-
-        [SerializeField]
-        private float speed;
-
-        private KCC _kinematicController;
-        private AnimationController _animationController;
-
-        private bool _hasInput;
-        private DefaultInput _input;
-        private bool _hasJumped;
+        private CharacterController _characterController;
 
         [Networked]
         private NetworkButtons PreviousButtons { get; set; }
 
         private void Awake()
         {
-            _kinematicController = GetComponent<KCC>();
-            _animationController = GetComponent<AnimationController>();
+            _characterController = GetComponent<CharacterController>();
         }
 
         public override void FixedUpdateNetwork()
         {
-            _hasInput = GetInput(out _input);
+            bool hasInput = GetInput(out DefaultInput input);
 
-            if (!_hasInput)
+            if (!hasInput)
             {
+                _characterController.Input = null;
                 return;
             }
 
-            Vector3 move = new Vector3(_input.Move.x, 0, _input.Move.y) * Runner.DeltaTime * speed;
-            _kinematicController.AddExternalVelocity(move);
-            _hasJumped = _input.Buttons.WasPressed(PreviousButtons, InputActions.Jump);
-            if (_hasJumped)
-            {
-                _kinematicController.Jump(Vector3.up * _jumpForce * Runner.DeltaTime);
-            }
+            _characterController.Input = input;
+            _characterController.PreviousButtons = PreviousButtons;
 
-            PreviousButtons = _input.Buttons;
-        }
-
-        public override void Render()
-        {
-            if (!_hasInput)
-            {
-                return;
-            }
-
-            _animationController.VerticalMotion = _input.Move.y;
-            _animationController.HorizontalMotion = _input.Move.x;
-            _animationController.HasJumped = _hasJumped;
-            _animationController.IsGrounded = _kinematicController.Data.IsGrounded;
-            _hasJumped = false;
+            PreviousButtons = input.Buttons;
         }
     }
 }

@@ -23,11 +23,10 @@ namespace Service.SessionService
             GameObject network = _defaultFactory.Create(_networkPrefab);
             NetworkRunner runner = network.GetComponent<NetworkRunner>();
             NetworkEvents events = network.GetComponent<NetworkEvents>();
-            INetworkSceneManager sceneManager = network.GetComponent<INetworkSceneManager>();
 
             runner.ProvideInput = true;
 
-            return _container.Instantiate<Session>(new object[] {runner, events, sceneManager});
+            return _container.Instantiate<Session>(new object[] {runner, events});
         }
     }
 }

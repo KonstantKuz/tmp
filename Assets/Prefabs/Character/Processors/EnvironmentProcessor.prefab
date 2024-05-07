@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SortKey: 1361164505
+  SortKey: 764577828
   ObjectInterest: 1
   Flags: 262145
   NestedObjects: []
@@ -64,7 +64,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   KinematicSpeed: 10
   JumpMultiplier: 20
-  Gravity: {x: 0, y: -20, z: 0}
+  Gravity: {x: 0, y: -40, z: 0}
   RelativePriority: 0
   MaxGroundAngle: 60
   DynamicGroundFriction: 20

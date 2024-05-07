@@ -1,6 +1,7 @@
 ﻿using Fusion;
 using Service.Factory;
 using Service.InputService;
+using UnityEngine;
 
 namespace Service.SessionService
 {
@@ -8,24 +9,23 @@ namespace Service.SessionService
     {
         private readonly IInputService _inputService;
 
-        public Session(NetworkRunner runner, NetworkEvents events, INetworkSceneManager sceneManager, IInputService inputService)
+        public Session(NetworkRunner runner, NetworkEvents events, IInputService inputService)
         {
             _inputService = inputService;
             Runner = runner;
             Events = events;
-            SceneManager = sceneManager;
             Factory = new NetworkFactory(runner);
         }
 
         public NetworkRunner Runner { get; }
         public NetworkEvents Events { get; }
-        public INetworkSceneManager SceneManager { get; }
         public NetworkFactory Factory { get; }
 
         public async void Start(StartGameArgs gameArgs)
         {
             _inputService.ActionsMap.Enable();
             Events.OnInput.AddListener(_inputService.PollInput);
+            Events.OnShutdown.AddListener(OnShutDown);
             await Runner.StartGame(gameArgs);
         }
 
@@ -33,6 +33,17 @@ namespace Service.SessionService
         {
             _inputService.ActionsMap.Disable();
             Events.OnInput.RemoveListener(_inputService.PollInput);
+            Events.OnShutdown.RemoveListener(OnShutDown);
+            if (!Runner.IsShutdown)
+            {
+                Runner.Shutdown();
+            }
+        }
+
+        private void OnShutDown(NetworkRunner runner, ShutdownReason reason)
+        {
+            Debug.Log($"Terminate session. Reason: {reason.ToString()}");
+            Terminate();
         }
     }
 }
