@@ -20,6 +20,7 @@ namespace Component.Character
 
         private CharacterControllerParams _params;
         private CharacterStateMachine _movementMachine;
+        private CharacterStateMachine _attackMachine;
 
         public DefaultInput? Input { get; set; }
         public NetworkButtons? PreviousButtons { get; set; }
@@ -45,9 +46,11 @@ namespace Component.Character
 
         void IStateMachineOwner.CollectStateMachines(List<IStateMachine> stateMachines)
         {
-            _movementMachine = new CharacterStateMachine(this, nameof(CharacterStateMachine), new Locomotion());
+            _movementMachine = new CharacterStateMachine(this, nameof(_movementMachine), new Locomotion());
+            _attackMachine = new CharacterStateMachine(this, nameof(_attackMachine), new Attack());
 
             stateMachines.Add(_movementMachine);
+            stateMachines.Add(_attackMachine);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using StaticData;
+using UnityEngine;
 
 namespace Component.Character
 {
@@ -6,6 +7,12 @@ namespace Component.Character
     {
         [SerializeField]
         private Animator _animator;
+
+        [SerializeField]
+        private AnimationEventsHandler _eventsHandler;
+
+        public Animator Animator => _animator;
+        public AnimationEventsHandler EventsHandler => _eventsHandler;
 
         public float VerticalMotion
         {
@@ -29,6 +36,12 @@ namespace Component.Character
         {
             get => _animator.GetBool(AnimatorHash.HasJumped);
             set => _animator.SetBool(AnimatorHash.HasJumped, value);
+        }
+
+        public bool HasAttacked
+        {
+            get => _animator.GetBool(AnimatorHash.HasAttacked);
+            set => _animator.SetBool(AnimatorHash.HasAttacked, value);
         }
     }
 }

@@ -1,10 +1,11 @@
+using StaticData;
 using UnityEngine;
 using Zenject;
 
 namespace UI
 {
     [CreateAssetMenu(
-        menuName = GlobalSettings.InstallersPath + nameof(UIRootInstaller),
+        menuName = SettingsPath.Installers + nameof(UIRootInstaller),
         fileName = nameof(UIRootInstaller)
     )]
     public class UIRootInstaller : ScriptableObjectInstaller

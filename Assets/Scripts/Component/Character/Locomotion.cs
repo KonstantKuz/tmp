@@ -46,7 +46,6 @@ namespace Component.Character
             AnimationController.HorizontalMotion = Input.Value.Move.x;
             AnimationController.HasJumped = _hasJumped;
             AnimationController.IsGrounded = KinematicController.Data.IsGrounded;
-            _hasJumped = false;
         }
     }
 }

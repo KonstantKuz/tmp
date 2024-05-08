@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using StaticData;
+using UnityEngine;
 using Zenject;
 
 namespace Service.InputService
 {
     [CreateAssetMenu(
-        menuName = GlobalSettings.InstallersPath + nameof(InputServiceInstaller),
+        menuName = SettingsPath.Installers + nameof(InputServiceInstaller),
         fileName = nameof(InputServiceInstaller)
     )]
     public class InputServiceInstaller : ScriptableObjectInstaller

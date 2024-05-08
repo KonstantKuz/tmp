@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using StaticData;
+using UnityEngine;
 using Zenject;
 
 namespace Service.Factory
 {
     [CreateAssetMenu(
-        menuName = GlobalSettings.InstallersPath + nameof(DefaultFactoryInstaller),
+        menuName = SettingsPath.Installers + nameof(DefaultFactoryInstaller),
         fileName = nameof(DefaultFactoryInstaller)
     )]
     public class DefaultFactoryInstaller : ScriptableObjectInstaller

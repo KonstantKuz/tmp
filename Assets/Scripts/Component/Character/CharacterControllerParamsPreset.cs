@@ -1,20 +1,21 @@
-﻿using UnityEngine;
+﻿using StaticData;
+using UnityEngine;
 
 namespace Component.Character
 {
     [CreateAssetMenu(
-        menuName = GlobalSettings.ScriptableObjectsPath + nameof(CharacterControllerParamsPreset),
+        menuName = SettingsPath.ScriptableObjects + nameof(CharacterControllerParamsPreset),
         fileName = nameof(CharacterControllerParamsPreset)
     )]
     public class CharacterControllerParamsPreset : ScriptableObject
     {
-        [SerializeField] 
+        [SerializeField]
         private float moveSpeed;
-        
-        [SerializeField] 
+
+        [SerializeField]
         private float jumpForce;
-        
-        [SerializeField] 
+
+        [SerializeField]
         private int maxInAirJumpCount;
 
         public CharacterControllerParams Value => new CharacterControllerParams

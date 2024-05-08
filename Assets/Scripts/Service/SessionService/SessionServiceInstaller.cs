@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using StaticData;
+using UnityEngine;
 using Zenject;
 
 namespace Service.SessionService
 {
     [CreateAssetMenu(
-        menuName = GlobalSettings.InstallersPath + nameof(SessionServiceInstaller),
+        menuName = SettingsPath.Installers + nameof(SessionServiceInstaller),
         fileName = nameof(SessionServiceInstaller)
     )]
     public class SessionServiceInstaller : ScriptableObjectInstaller

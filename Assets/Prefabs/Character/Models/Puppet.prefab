@@ -328,6 +328,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3534228780225487305}
   - component: {fileID: 3534228780234804807}
+  - component: {fileID: 6032036510162653536}
   m_Layer: 0
   m_Name: Puppet
   m_TagString: Untagged
@@ -373,6 +374,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6032036510162653536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3534228780225330217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a84f2ad2045409c8b2ab3cc0435f9ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3534228780225330219
 GameObject:
   m_ObjectHideFlags: 0
