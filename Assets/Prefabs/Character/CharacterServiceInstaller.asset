@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abbd6986298d4ec086ede7055b1e3633, type: 3}
-  m_Name: SessionServiceInstaller
+  m_Script: {fileID: 11500000, guid: 58b14de1ff564b088d076a7e30f307c8, type: 3}
+  m_Name: CharacterServiceInstaller
   m_EditorClassIdentifier: 
-  <SessionContextPrefab>k__BackingField: {fileID: 6939183564582604400, guid: 9d4ef1f87dfc9454b877ce350a37806f,
+  <PlayerPrefab>k__BackingField: {fileID: 236201767699193938, guid: 21e29ffd9763b734f8d8bae6ebe701b9,
     type: 3}

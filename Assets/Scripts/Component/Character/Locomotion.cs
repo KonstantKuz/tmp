@@ -10,13 +10,13 @@ namespace Component.Character
 
         protected override void OnFixedUpdate()
         {
-            if (Input == null)
+            if (!CharacterMachine.Controller.HasStateAuthority)
             {
                 return;
             }
 
             Vector3 inputDirection =
-                KinematicController.Data.TransformRotation * new Vector3(Input.Value.Move.x, 0, Input.Value.Move.y);
+                KinematicController.Data.TransformRotation * new Vector3(Input.Move.x, 0, Input.Move.y);
             KinematicController.SetInputDirection(inputDirection);
 
             if (KinematicController.Data.IsGrounded)
@@ -24,8 +24,7 @@ namespace Component.Character
                 _jumpCount = 0;
             }
 
-            _hasJumped = PreviousButtons != null &&
-                         Input.Value.Buttons.WasPressed(PreviousButtons.Value, InputActions.Jump) &&
+            _hasJumped = Input.Buttons.WasPressed(PreviousButtons, InputActions.Jump) &&
                          _jumpCount - 1 < Params.MaxInAirJumpCount;
 
             if (_hasJumped)
@@ -37,13 +36,8 @@ namespace Component.Character
 
         protected override void OnRender()
         {
-            if (Input == null)
-            {
-                return;
-            }
-
-            AnimationController.VerticalMotion = Input.Value.Move.y;
-            AnimationController.HorizontalMotion = Input.Value.Move.x;
+            AnimationController.VerticalMotion = Input.Move.y;
+            AnimationController.HorizontalMotion = Input.Move.x;
             AnimationController.HasJumped = _hasJumped;
             AnimationController.IsGrounded = KinematicController.Data.IsGrounded;
         }

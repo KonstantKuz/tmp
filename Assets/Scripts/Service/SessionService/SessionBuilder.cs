@@ -1,32 +1,24 @@
-﻿using Fusion;
-using Service.Factory;
+﻿using Service.Factory;
 using UnityEngine;
-using Zenject;
 
 namespace Service.SessionService
 {
     public class SessionBuilder
     {
-        private readonly DiContainer _container;
         private readonly DefaultFactory _defaultFactory;
         private readonly GameObject _networkPrefab;
 
-        public SessionBuilder(DiContainer container, DefaultFactory defaultFactory, GameObject networkPrefab)
+        public SessionBuilder(DefaultFactory defaultFactory, GameObject networkPrefab)
         {
-            _container = container;
             _defaultFactory = defaultFactory;
             _networkPrefab = networkPrefab;
         }
 
-        public Session Create()
+        public ISession Create()
         {
-            GameObject network = _defaultFactory.Create(_networkPrefab);
-            NetworkRunner runner = network.GetComponent<NetworkRunner>();
-            NetworkEvents events = network.GetComponent<NetworkEvents>();
-
-            runner.ProvideInput = true;
-
-            return _container.Instantiate<Session>(new object[] {runner, events});
+            ISession sessionContext = _defaultFactory.Create(_networkPrefab).GetComponent<ISession>();
+            sessionContext.Runner.ProvideInput = true;
+            return sessionContext;
         }
     }
 }

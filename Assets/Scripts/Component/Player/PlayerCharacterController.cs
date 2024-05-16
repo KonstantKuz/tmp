@@ -1,33 +1,27 @@
+using Component.Character;
 using Fusion;
 using Service.InputService;
-using CharacterController = Component.Character.CharacterController;
 
 namespace Component.Player
 {
     public class PlayerCharacterController : NetworkBehaviour
     {
-        private CharacterController _characterController;
+        private NetworkCharacter _character;
 
         [Networked]
         private NetworkButtons PreviousButtons { get; set; }
 
         private void Awake()
         {
-            _characterController = GetComponent<CharacterController>();
+            _character = GetComponent<NetworkCharacter>();
         }
 
         public override void FixedUpdateNetwork()
         {
-            bool hasInput = GetInput(out DefaultInput input);
+            GetInput(out DefaultInput input);
 
-            if (!hasInput)
-            {
-                _characterController.Input = null;
-                return;
-            }
-
-            _characterController.Input = input;
-            _characterController.PreviousButtons = PreviousButtons;
+            _character.Input = input;
+            _character.PreviousButtons = PreviousButtons;
 
             PreviousButtons = input.Buttons;
         }

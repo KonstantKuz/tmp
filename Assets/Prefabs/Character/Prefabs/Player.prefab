@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6268107299567577027}
   - component: {fileID: 5728605506721585900}
   - component: {fileID: 8317885962418866839}
+  - component: {fileID: 3168731906023384755}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -60,6 +61,7 @@ MonoBehaviour:
   - {fileID: 6268107299567577027}
   - {fileID: 5728605506721585900}
   - {fileID: 8317885962418866839}
+  - {fileID: 3168731906023384755}
 --- !u!54 &6440168753544337734
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -172,6 +174,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 287568c5722b82d4b8964b0df30e91ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3168731906023384755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 236201767699193938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 506319458, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 9219451563824779028}
+  TotalWords: 3
+  ApplyTiming: 2
+  SyncSettings: 79
+  StateHashes: 00000000dea452f29d0a61f1b1afdc305a6c54cd1c6a543371722103f8a8e3d1f1c80b7e7d97ecf684e29c6a85c53fad27e272bb3f9436349db37b22a9a431430b837c550a3155dda81618cb
+  TriggerHashes: 00000000
 --- !u!1 &5045558201984979804
 GameObject:
   m_ObjectHideFlags: 0

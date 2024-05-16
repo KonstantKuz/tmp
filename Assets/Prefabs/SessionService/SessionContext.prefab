@@ -9,12 +9,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7964934873988429235}
+  - component: {fileID: 5974453741778447105}
+  - component: {fileID: 5826752830441854204}
   - component: {fileID: 6380986510861327171}
   - component: {fileID: 6867118576035598145}
   - component: {fileID: 8319860385503305702}
   - component: {fileID: 5706452179697410858}
   m_Layer: 0
-  m_Name: NetworkRunner
+  m_Name: SessionContext
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,6 +37,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5974453741778447105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6939183564582604400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 460d86561355436982fa8f205512a763, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers:
+  - {fileID: 11400000, guid: 14002b34eb43d2948adb5cc471feb222, type: 2}
+  _monoInstallers:
+  - {fileID: 5826752830441854204}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
+  <Runner>k__BackingField: {fileID: 6380986510861327171}
+  <Events>k__BackingField: {fileID: 8319860385503305702}
+--- !u!114 &5826752830441854204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6939183564582604400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d30fe5d117564695847536b7333ca292, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6380986510861327171
 MonoBehaviour:
   m_ObjectHideFlags: 0

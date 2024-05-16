@@ -14,12 +14,7 @@ namespace Service.SessionService
             _sessionBuilder = sessionBuilder;
         }
 
-        public Session Current { get; private set; }
-
-        private void CreatePlayer(NetworkRunner networkRunner, PlayerRef playerRef)
-        {
-            Current.Factory.Create(playerRef, _installer.PlayerPrefab);
-        }
+        public ISession Current { get; private set; }
 
         void ISessionService.Start(StartGameArgs gameArgs)
         {
@@ -30,8 +25,13 @@ namespace Service.SessionService
             }
 
             Current = _sessionBuilder.Create();
-            Current.Events.PlayerJoined.AddListener(CreatePlayer);
             Current.Start(gameArgs);
+            Current.Events.OnShutdown.AddListener(OnSessionTerminated);
+        }
+
+        private void OnSessionTerminated(NetworkRunner runner, ShutdownReason reason)
+        {
+            Current = null;
         }
     }
 }

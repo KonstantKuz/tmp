@@ -24,27 +24,16 @@ namespace Component.Character
 
         protected override void OnFixedUpdate()
         {
-            if (Input == null)
-            {
-                return;
-            }
-
             if (_hasAttacked)
             {
                 return;
             }
 
-            _hasAttacked = PreviousButtons != null &&
-                           Input.Value.Buttons.WasPressed(PreviousButtons.Value, InputActions.Fire);
+            _hasAttacked = Input.Buttons.WasPressed(PreviousButtons, InputActions.Fire);
         }
 
         protected override void OnRender()
         {
-            if (Input == null)
-            {
-                return;
-            }
-
             AnimationController.HasAttacked = _hasAttacked;
         }
     }

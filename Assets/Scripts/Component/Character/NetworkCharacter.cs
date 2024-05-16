@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Component.Character
 {
-    public class CharacterController : NetworkBehaviour, IStateMachineOwner
+    public class NetworkCharacter : NetworkBehaviour, IStateMachineOwner
     {
         [field:SerializeField]
         public CharacterControllerParamsPreset ParamsPreset { get; private set; }
@@ -18,30 +18,28 @@ namespace Component.Character
         [field:SerializeField]
         public AnimationController AnimationController { get; private set; }
 
-        private CharacterControllerParams _params;
         private CharacterStateMachine _movementMachine;
         private CharacterStateMachine _attackMachine;
 
-        public DefaultInput? Input { get; set; }
-        public NetworkButtons? PreviousButtons { get; set; }
-        public CharacterControllerParams Params
-        {
-            get => _params;
-            set => SetParams(value);
-        }
+        [Networked]
+        public DefaultInput Input { get; set; }
+        [Networked]
+        public NetworkButtons PreviousButtons { get; set; }
+        [Networked]
+        public CharacterControllerParams Params { get; set; }
 
         private void SetParams(CharacterControllerParams newParams)
         {
-            _params = newParams;
+            Params = newParams;
 
             EnvironmentProcessor environmentProcessor = KinematicController.GetProcessor<EnvironmentProcessor>();
-            environmentProcessor.KinematicSpeed = _params.Speed;
-            environmentProcessor.JumpMultiplier = _params.JumpForce;
+            environmentProcessor.KinematicSpeed = Params.Speed;
+            environmentProcessor.JumpMultiplier = Params.JumpForce;
         }
 
         public override void Spawned()
         {
-            Params = ParamsPreset.Value;
+            SetParams(ParamsPreset.Value);
         }
 
         void IStateMachineOwner.CollectStateMachines(List<IStateMachine> stateMachines)

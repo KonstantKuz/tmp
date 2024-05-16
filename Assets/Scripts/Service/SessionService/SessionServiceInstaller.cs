@@ -11,10 +11,7 @@ namespace Service.SessionService
     public class SessionServiceInstaller : ScriptableObjectInstaller
     {
         [field:SerializeField]
-        public GameObject NetworkPrefab { get; set; }
-
-        [field:SerializeField]
-        public GameObject PlayerPrefab { get; set; }
+        public GameObject SessionContextPrefab { get; private set; }
 
         public override void InstallBindings()
         {
@@ -26,7 +23,7 @@ namespace Service.SessionService
             Container
                 .Bind<SessionBuilder>()
                 .AsSingle()
-                .WithArguments(NetworkPrefab);
+                .WithArguments(SessionContextPrefab);
         }
     }
 }

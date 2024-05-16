@@ -4,9 +4,9 @@ namespace Component.Character
 {
     public class CharacterStateMachine : StateMachine<State>
     {
-        public readonly CharacterController Controller;
+        public readonly NetworkCharacter Controller;
 
-        public CharacterStateMachine(CharacterController controller, string name, params State[] states) : base(name, states)
+        public CharacterStateMachine(NetworkCharacter controller, string name, params State[] states) : base(name, states)
         {
             Controller = controller;
         }

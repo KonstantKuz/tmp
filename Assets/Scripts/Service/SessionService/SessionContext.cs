@@ -2,26 +2,30 @@
 using Service.Factory;
 using Service.InputService;
 using UnityEngine;
+using Zenject;
 
 namespace Service.SessionService
 {
-    public class Session
+    public class SessionContext : GameObjectContext, ISession
     {
-        private readonly IInputService _inputService;
+        [field:SerializeField]
+        public NetworkRunner Runner { get; private set; }
 
-        public Session(IInputService inputService, NetworkRunner runner, NetworkEvents events)
+        [field:SerializeField]
+        public NetworkEvents Events { get; private set; }
+
+        public NetworkFactory Factory { get; private set; }
+
+        private IInputService _inputService;
+
+        [Inject]
+        private void Construct(IInputService inputService)
         {
             _inputService = inputService;
-            Runner = runner;
-            Events = events;
-            Factory = new NetworkFactory(runner);
+            Factory = new NetworkFactory(Runner);
         }
 
-        public NetworkRunner Runner { get; }
-        public NetworkEvents Events { get; }
-        public NetworkFactory Factory { get; }
-
-        public async void Start(StartGameArgs gameArgs)
+        async void ISession.Start(StartGameArgs gameArgs)
         {
             _inputService.ActionsMap.Enable();
             Events.OnInput.AddListener(_inputService.PollInput);
@@ -29,7 +33,7 @@ namespace Service.SessionService
             await Runner.StartGame(gameArgs);
         }
 
-        public void Terminate()
+        void ISession.Terminate()
         {
             _inputService.ActionsMap.Disable();
             Events.OnInput.RemoveListener(_inputService.PollInput);
@@ -43,7 +47,7 @@ namespace Service.SessionService
         private void OnShutDown(NetworkRunner runner, ShutdownReason reason)
         {
             Debug.Log($"Terminate session. Reason: {reason.ToString()}");
-            Terminate();
+            ((ISession) this).Terminate();
         }
     }
 }
