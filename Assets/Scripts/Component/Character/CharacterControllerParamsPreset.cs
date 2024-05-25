@@ -18,11 +18,19 @@ namespace Component.Character
         [SerializeField]
         private int maxInAirJumpCount;
 
-        public CharacterControllerParams Value => new CharacterControllerParams
+        [SerializeField]
+        private float rootMotionSpeedMultiplier;
+
+        [SerializeField]
+        private float jumpInputSupportMultiplier;
+
+        public NetworkCharacterParams Value => new()
         {
             Speed = moveSpeed,
             JumpForce = jumpForce,
-            MaxInAirJumpCount = maxInAirJumpCount
+            MaxInAirJumpCount = maxInAirJumpCount,
+            RootMotionSpeedMultiplier = rootMotionSpeedMultiplier,
+            JumpInputSupportMultiplier = jumpInputSupportMultiplier,
         };
     }
 }

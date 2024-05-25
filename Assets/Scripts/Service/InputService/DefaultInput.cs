@@ -5,7 +5,8 @@ namespace Service.InputService
 {
     public struct DefaultInput : INetworkInput
     {
-        public Vector2 Move;
+        public Vector2 MoveDirection;
+        public Vector2 LookDirection;
         public NetworkButtons Buttons;
     }
 }

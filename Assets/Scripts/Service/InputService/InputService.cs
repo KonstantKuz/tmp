@@ -16,7 +16,8 @@ namespace Service.InputService
         void IInputService.PollInput(NetworkRunner runner, NetworkInput input)
         {
             DefaultInput defaultInput = new DefaultInput();
-            defaultInput.Move = ActionsMap.Player.Move.ReadValue<Vector2>();
+            defaultInput.MoveDirection = ActionsMap.Player.Move.ReadValue<Vector2>();
+            defaultInput.LookDirection = ActionsMap.Player.Look.ReadValue<Vector2>();
             defaultInput.Buttons.Set(InputActions.Jump, ActionsMap.Player.Jump.IsPressed());
             defaultInput.Buttons.Set(InputActions.Fire, ActionsMap.Player.Fire.IsPressed());
             input.Set(defaultInput);

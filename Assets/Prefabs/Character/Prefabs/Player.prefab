@@ -108,7 +108,6 @@ MonoBehaviour:
     Processors:
     - {fileID: 4219866145273439913, guid: 97f42d6fd55547f4f8da129ed8b6c92d, type: 3}
     - {fileID: 561824206424634091, guid: 07e50549e2431ca4ea63a2e3477f0608, type: 3}
-    - {fileID: 8306782452827789390, guid: 4c0ab89c0668b6943a14585666bae9d6, type: 3}
     TeleportThreshold: 1
     MaxPenetrationSteps: 8
     CCDRadiusMultiplier: 0.75
@@ -132,7 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 9219451563824779028}
-  _eventsHandler: {fileID: 2109955388526235699}
+  events: {fileID: 2109955388526235699}
 --- !u!114 &6268107299567577027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,10 +186,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 9219451563824779028}
-  TotalWords: 3
+  TotalWords: 5
   ApplyTiming: 2
   SyncSettings: 79
-  StateHashes: 00000000dea452f29d0a61f1b1afdc305a6c54cd1c6a543371722103f8a8e3d1f1c80b7e7d97ecf684e29c6a85c53fad27e272bb3f9436349db37b22a9a431430b837c550a3155dda81618cb
+  StateHashes: 00000000dea452f29d0a61f1b1afdc305a6c54cd1c6a54337172210386be8ed6a0c4533bf41ec2dd120bc36b85c53fad27e272bb3f9436349db37b22a9a431430b837c550a3155dda81618cb
   TriggerHashes: 00000000
 --- !u!1 &5045558201984979804
 GameObject:

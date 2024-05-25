@@ -468,8 +468,8 @@ ModelImporter:
       name: Attack_4Combo_ALL
       takeName: Take 001
       internalID: 0
-      firstFrame: 0
-      lastFrame: 15
+      firstFrame: 2
+      lastFrame: 13
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -479,7 +479,7 @@ ModelImporter:
       loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 1
-      loopBlendPositionY: 0
+      loopBlendPositionY: 1
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
       keepOriginalPositionY: 1
@@ -489,7 +489,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.85657424
+      - time: 0.86480004
         functionName: InvokeEvent
         data: AttackFinished
         objectReferenceParameter: {instanceID: 0}

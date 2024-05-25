@@ -6,6 +6,8 @@ namespace StaticData
     {
         public static readonly int HorizontalMotion = Animator.StringToHash("HorizontalMotion");
         public static readonly int VerticalMotion = Animator.StringToHash("VerticalMotion");
+        public static readonly int HorizontalMotionNormalized = Animator.StringToHash("HorizontalMotionNormalized");
+        public static readonly int VerticalMotionNormalized = Animator.StringToHash("VerticalMotionNormalized");
         public static readonly int IsGrounded = Animator.StringToHash("IsGrounded");
         public static readonly int HasJumped = Animator.StringToHash("HasJumped");
         public static readonly int HasAttacked = Animator.StringToHash("HasAttacked");

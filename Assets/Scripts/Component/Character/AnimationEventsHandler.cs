@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using StaticData;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -6,7 +7,10 @@ namespace Component.Character
 {
     public class AnimationEventsHandler : MonoBehaviour
     {
-        private readonly Dictionary<string, UnityEvent> _events = new();
+        private readonly Dictionary<string, UnityEvent> _events = new()
+        {
+            {AnimationEvents.OnAnimatorMove, new UnityEvent()}
+        };
 
         public UnityEvent this[string eventName]
         {
@@ -29,6 +33,11 @@ namespace Component.Character
             }
 
             _events[eventName].Invoke();
+        }
+
+        private void OnAnimatorMove()
+        {
+            _events[AnimationEvents.OnAnimatorMove].Invoke();
         }
     }
 }

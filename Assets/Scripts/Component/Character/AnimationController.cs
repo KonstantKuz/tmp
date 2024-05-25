@@ -9,21 +9,41 @@ namespace Component.Character
         private Animator _animator;
 
         [SerializeField]
-        private AnimationEventsHandler _eventsHandler;
+        private AnimationEventsHandler events;
 
         public Animator Animator => _animator;
-        public AnimationEventsHandler EventsHandler => _eventsHandler;
+        public AnimationEventsHandler Events => events;
 
         public float VerticalMotion
         {
             get => _animator.GetFloat(AnimatorHash.VerticalMotion);
-            set => _animator.SetFloat(AnimatorHash.VerticalMotion, value);
+            set
+            {
+                _animator.SetFloat(AnimatorHash.VerticalMotion, value);
+                VerticalMotionNormalized = Mathf.RoundToInt(value);
+            }
         }
 
         public float HorizontalMotion
         {
             get => _animator.GetFloat(AnimatorHash.HorizontalMotion);
-            set => _animator.SetFloat(AnimatorHash.HorizontalMotion, value);
+            set
+            {
+                _animator.SetFloat(AnimatorHash.HorizontalMotion, value);
+                HorizontalMotionNormalized = Mathf.RoundToInt(value);
+            }
+        }
+
+        public int VerticalMotionNormalized
+        {
+            get => _animator.GetInteger(AnimatorHash.VerticalMotionNormalized);
+            private set => _animator.SetInteger(AnimatorHash.VerticalMotionNormalized, value);
+        }
+
+        public int HorizontalMotionNormalized
+        {
+            get => _animator.GetInteger(AnimatorHash.HorizontalMotionNormalized);
+            private set => _animator.SetInteger(AnimatorHash.HorizontalMotionNormalized, value);
         }
 
         public bool IsGrounded

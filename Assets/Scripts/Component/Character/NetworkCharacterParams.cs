@@ -2,10 +2,12 @@
 
 namespace Component.Character
 {
-    public struct CharacterControllerParams : INetworkStruct
+    public struct NetworkCharacterParams : INetworkStruct
     {
         public float Speed;
         public float JumpForce;
         public int MaxInAirJumpCount;
+        public float RootMotionSpeedMultiplier;
+        public float JumpInputSupportMultiplier;
     }
 }

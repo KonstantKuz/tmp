@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Component.Character.State;
 using Fusion;
 using Fusion.Addons.FSM;
 using Fusion.Addons.KCC;
@@ -26,9 +27,9 @@ namespace Component.Character
         [Networked]
         public NetworkButtons PreviousButtons { get; set; }
         [Networked]
-        public CharacterControllerParams Params { get; set; }
+        public NetworkCharacterParams Params { get; set; }
 
-        private void SetParams(CharacterControllerParams newParams)
+        private void SetParams(NetworkCharacterParams newParams)
         {
             Params = newParams;
 
